@@ -116,23 +116,32 @@ def supplement(add_shelf):
       print(add_shelf)
       break
 
-# Task №3 (Python exeption)
+# Task №3 (Python exeption) (nd)
 
 def displaying(all_shelf, all_number):
   user_input_number =  input('введите номер документа: ')
   all_doc_shelf = 0
   for all_shelf in directories:
       all_doc_shelf += 1
-      if user_input_number in directories.get(all_shelf):
-        for output_number in all_number:
-          try:
-            if user_input_number in output_number.get('number'):
-              print(output_number['name'])
-              return 
-            elif user_input_number not in output_number.get('number'):
-              raise KeyError
-          except KeyError:
-            print('Документ не содержит имя владельца')
+      try:
+        if user_input_number in directories.get(all_shelf):
+          for output_number in all_number:
+            try:
+              if user_input_number in output_number.get('number'):
+                print(output_number['name'])
+                return
+              else:
+                user_input_number not in output_number.get('number')
+                raise KeyError
+            except KeyError:
+                print('Документ не содержит имя владельца')
+        else:
+          user_input_number not in directories.get(all_shelf)
+          raise NameError
+      except NameError:
+        print('Документа по данному номеру не обнаружено')
+        return
+        
 
 def main():
   while True:
@@ -151,6 +160,8 @@ def main():
       transfer(directories)
     elif user_input == 'as':
       supplement(directories)
+    elif user_input == 'nd':
+      displaying(directories, documents)
     elif user_input == 'q':
       print('До свидания!')
       break
