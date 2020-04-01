@@ -116,6 +116,24 @@ def supplement(add_shelf):
       print(add_shelf)
       break
 
+# Task №3 (Python exeption)
+
+def displaying(all_shelf, all_number):
+  user_input_number =  input('введите номер документа: ')
+  all_doc_shelf = 0
+  for all_shelf in directories:
+      all_doc_shelf += 1
+      if user_input_number in directories.get(all_shelf):
+        for output_number in all_number:
+          try:
+            if user_input_number in output_number.get('number'):
+              print(output_number['name'])
+              return 
+            elif user_input_number not in output_number.get('number'):
+              raise KeyError
+          except KeyError:
+            print('Документ не содержит имя владельца')
+
 def main():
   while True:
     user_input = input()
