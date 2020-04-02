@@ -118,29 +118,24 @@ def supplement(add_shelf):
 
 # Task №3 (Python exeption) (nd)
 
-def displaying(all_shelf, all_number):
+def displaying(all_shelf, doc_number):
   user_input_number =  input('введите номер документа: ')
-  all_doc_shelf = 0
-  for all_shelf in directories:
-      all_doc_shelf += 1
-      try:
-        if user_input_number in directories.get(all_shelf):
-          for output_number in all_number:
-            try:
+  for all_doc_shelf in all_shelf.values():
+    try:
+        if user_input_number in all_doc_shelf:
+          for output_number in doc_number:
               if user_input_number in output_number.get('number'):
-                print(output_number['name'])
-                return
+                  print(output_number['name'])
+                  return
               else:
                 user_input_number not in output_number.get('number')
-                raise KeyError
-            except KeyError:
-                print('Документ не содержит имя владельца')
+                print('У документа нет параметра "name"')
+          return 
         else:
-          user_input_number not in directories.get(all_shelf)
-          raise NameError
-      except NameError:
-        print('Документа по данному номеру не обнаружено')
-        return
+          user_input_number not in all_doc_shelf 
+          raise ValueError 
+    except ValueError:
+      print('Документа с таким номером нет на полках')
         
 
 def main():
