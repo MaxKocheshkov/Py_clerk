@@ -121,21 +121,19 @@ def supplement(add_shelf):
 def displaying(all_shelf, doc_number):
   user_input_number =  input('введите номер документа: ')
   for all_doc_shelf in all_shelf.values():
-    try:
+
         if user_input_number in all_doc_shelf:
-          for output_number in doc_number:
-              if user_input_number in output_number.get('number'):
+
+            for output_number in doc_number:
+              try:
+                if user_input_number in output_number.get('number'):
+                
                   print(output_number['name'])
                   return
-              else:
-                user_input_number not in output_number.get('number')
-                print('У документа нет параметра "name"')
-          return 
-        else:
-          user_input_number not in all_doc_shelf 
-          raise ValueError 
-    except ValueError:
-      print('Документа с таким номером нет на полках')
+                else:
+                  raise KeyError
+              except KeyError:
+                print('Ошибка ввода')
         
 
 def main():
